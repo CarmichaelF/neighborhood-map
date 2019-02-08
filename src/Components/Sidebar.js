@@ -4,9 +4,9 @@ import '../App.css';
 class SideBar extends Component {
   populateUl(items){
     try{
-      return items.map((title) =>{
-        return (<li className="nav-item">
-        <a className="nav-link" href="#">{title}</a>
+      return items.map((item) =>{
+        return (<li key={item.id} className="nav-item">
+        <a className="nav-link" href="#">{item.name}</a>
       </li>)
       })
     }
@@ -14,10 +14,23 @@ class SideBar extends Component {
       console.log(error);
     }
   }
+
+  toggleMenu(){
+    document.getElementById('sidebar-list').classList.toggle('hidden');
+    if(document.getElementById('hamburguer-icon').classList.contains('fa-bars')){
+      document.getElementById('hamburguer-icon').classList.remove('fa-bars');
+      document.getElementById('hamburguer-icon').classList.add('fa-times');
+    }
+    else{
+      document.getElementById('hamburguer-icon').classList.remove('fa-times');
+    document.getElementById('hamburguer-icon').classList.add('fa-bars');
+    }
+  }
+
   render() {
     return (
-      <aside className= "hidden">
-        <button id= "hamburguer"><i class="fas fa-bars"></i></button>
+      <aside id= 'sidebar-list' className= "hidden">
+        <button onClick={this.toggleMenu} id= "hamburguer"><i id="hamburguer-icon" className="fas fa-bars"></i></button>
         <ul className="nav flex-column">
           {this.populateUl(this.props.sidebaritems)}
         </ul>

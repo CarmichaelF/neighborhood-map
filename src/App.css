@@ -1,6 +1,7 @@
 aside{
     width: 200px;
     overflow: scroll;
+    transition: 0.4s;
 }
 
 ul.nav li{
@@ -23,16 +24,24 @@ ul.nav li a{
 }
 
 #hamburguer{
-    margin-left: 30px;
+    margin-left: 34px;
     margin-top: 20px;
+    background-color: transparent;
+    border: none;
+}
+
+#hamburguer-icon{
+    cursor: pointer;
 }
 
 .hidden{
     overflow: hidden;
     width: 80px;
+    transition: 0.4s;
 }
 
 .hidden li{
     display: none;
     margin-left: -100px;
+    transition: 0.4s;
 }
