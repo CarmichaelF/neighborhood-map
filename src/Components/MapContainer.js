@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Map, GoogleApiWrapper, InfoWindow, Marker} from 'google-maps-react';
+import Foursquare from '../Images/powered-by-foursquare-grey.png';
 
 const mapStyles = {
   width: '100%',
@@ -13,26 +14,37 @@ export class MapContainer extends Component {
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
-      selectedPlace: {},
+      selectedPlace: {}
     };
   }
 
-  onMarkerClick = (props, marker, e) =>
+  onMarkerClick = (props, marker) =>
   this.setState({
     selectedPlace: props,
     activeMarker: marker,
     showingInfoWindow: true
   });
 
+  onMouseover(props, marker) {
+      marker.setAnimation(props.google.maps.Animation.BOUNCE);
+  }
+
+  onMouseOut(props,marker){
+    marker.setAnimation(null);
+  }
+
   createMarkers(markers){
     try{
-      console.log("Markers", markers);
       return markers.map((element) =>{
         return <Marker
                 onClick={this.onMarkerClick}
+                onMouseover={this.onMouseover}
+                onMouseout={this.onMouseOut}
                 key = {element.id}
                 title={element.name}
                 name={element.name}
+                address={element.location.formattedAddress[0]}
+                address2 = {element.location.formattedAddress[1]}
                 position={{lat: element.location.lat, lng: element.location.lng}}>
         </Marker>
       })
@@ -57,7 +69,9 @@ export class MapContainer extends Component {
           marker={this.state.activeMarker}
           visible={this.state.showingInfoWindow}>
             <div>
-              <h1>{this.state.selectedPlace.name}</h1>
+              <h5>{this.state.selectedPlace.name}</h5>
+              <p>Address: {this.state.selectedPlace.address}<br></br>{this.state.selectedPlace.address2}</p><br></br>
+              <a href= "https://developer.foursquare.com/" target="blank"><img id="foursquareImg" src= {Foursquare} alt= "Foursquare Icon"></img></a>
             </div>
         </InfoWindow>
       </Map>

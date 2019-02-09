@@ -27,7 +27,7 @@ constructor(props){
   }
 
   getAll(){
-    fetch('https://api.foursquare.com/v2/venues/trending?ll=40.752557,-73.973435&limit=10&radius=10000&client_id=UCF54S5TJFOVXMJ1J4AGS0MTAW0CBRCCPAXGX2CTOINGGXTU&client_secret=VIEJP3NBRQ3U2KAXEMDYHQ1XTLAJJS2AROH3YXYCJYEHACVV&v=20190208')
+    fetch('https://api.foursquare.com/v2/venues/search?ll=40.752557,-73.973435&query=restaurant&limit=10&intent=browse&radius=10000&client_id=UCF54S5TJFOVXMJ1J4AGS0MTAW0CBRCCPAXGX2CTOINGGXTU&client_secret=VIEJP3NBRQ3U2KAXEMDYHQ1XTLAJJS2AROH3YXYCJYEHACVV&v=20190208')
     .then((response) => {
         // Code for handling API response
       response.json().then((resp) => {

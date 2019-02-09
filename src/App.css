@@ -1,5 +1,5 @@
 aside{
-    width: 200px;
+    width: 250px;
     overflow: scroll;
     transition: 0.4s;
 }
@@ -32,6 +32,10 @@ ul.nav li a{
 
 #hamburguer-icon{
     cursor: pointer;
+}
+
+#foursquareImg{
+    width: 200px;
 }
 
 .hidden{
