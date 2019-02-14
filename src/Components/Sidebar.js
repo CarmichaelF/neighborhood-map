@@ -13,7 +13,14 @@ class SideBar extends Component {
       return items.map((item) =>{
         return (<li key={item.id} className="nav-item">
         <button
-        onClick = {() => this.handleClick(item, item)}
+        onClick = {() => this.props.handleClick({
+          position:{
+            lat: item.location.labeledLatLngs[0].lat, 
+            lng:item.location.labeledLatLngs[0].lng},
+          address: item.location.formattedAddress[0],
+          address2: item.location.formattedAddress[1],
+          name: item.name
+        })}
         className="nav-link" 
         href="#">{item.name}</button>
       </li>)

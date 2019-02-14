@@ -9,7 +9,6 @@ class App extends Component {
 //Construtor foi modificado
   constructor(props){
     super(props);
-    this.handleClick = this.handleClick.bind(this);
     this.state = {
       showingInfoWindow: false,
       activeMarker: {},
@@ -36,15 +35,13 @@ class App extends Component {
   }
   //*
 
-  handleClick = (props, marker) => {
-    console.log("PROPS", props);
-    console.log("MARKER", marker)
-    this.onMarkerClick(props, marker);
+  handleClick = (item) => {
+    this.onMarkerClick(item, item);
   }
 
   createInfoWindows(){
     return <InfoWindow
-            marker={this.state.activeMarker}
+            position={this.state.activeMarker.position}
             visible={this.state.showingInfoWindow}>
               <div>
                 <h5>{this.state.selectedPlace.name}</h5>
