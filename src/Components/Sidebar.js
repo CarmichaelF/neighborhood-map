@@ -8,6 +8,11 @@ class SideBar extends Component {
     this.state = {sidebaritems: {}};
   }
 
+  /*
+  /Put on the list the elements using
+  /the information of foursquare API.
+  */
+
   populateUl(items){
     try{
       return items.map((item) =>{
@@ -16,10 +21,11 @@ class SideBar extends Component {
         onClick = {() => this.props.handleClick({
           position:{
             lat: item.location.labeledLatLngs[0].lat, 
-            lng:item.location.labeledLatLngs[0].lng},
-          address: item.location.formattedAddress[0],
-          address2: item.location.formattedAddress[1],
-          name: item.name
+            lng:item.location.labeledLatLngs[0].lng
+          },
+            address: item.location.formattedAddress[0],
+            address2: item.location.formattedAddress[1],
+            name: item.name
         })}
         className="nav-link" 
         href="#">{item.name}</button>
@@ -30,6 +36,10 @@ class SideBar extends Component {
       console.log("ERROR:", error);
     }
   }
+
+  /*
+  /Toggle the classes of hamburguer menu.
+  */
 
   toggleMenu(){
     document.getElementById('sidebar-list').classList.toggle('hidden');
@@ -42,6 +52,10 @@ class SideBar extends Component {
     document.getElementById('hamburguer-icon').classList.add('fa-bars');
     }
   }
+
+  /*
+  /Filter the li's in the list based on the input of user.
+  */
 
   filter(value){
     this.setState({sidebaritems:this.props.sidebaritems.filter((element) =>{

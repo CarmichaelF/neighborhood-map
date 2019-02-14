@@ -6,7 +6,12 @@ import Sidebar from './Components/Sidebar';
 import './App.css';
 
 class App extends Component {
-//Construtor foi modificado
+  /*
+  /State: showingInfoWindow is used to show or hide an infoWindow,
+  /activeMarker is used to save the actual marker/position,
+  /selectedPlace is used to save props of a clicked marker.
+  */
+
   constructor(props){
     super(props);
     this.state = {
@@ -17,7 +22,12 @@ class App extends Component {
     };
   }
 
-  //*
+  /*
+  /This method is used to change the state
+  /when a marker is clicked on the map
+  /or when the user clicks on a list item.
+  */
+
   onMarkerClick = (props, marker) =>
     this.setState({
       selectedPlace: props,
@@ -25,20 +35,32 @@ class App extends Component {
       showingInfoWindow: true
     });
 
-  //*
+  /*
+  /Method used to set an animation when mouse is over.
+  */
+
   onMouseover(props, marker) {
       marker.setAnimation(props.google.maps.Animation.BOUNCE);
   }
-  //*
+
+  /*
+  /Method used to unset an animation when mouse is out.
+  */
+
   onMouseOut(props,marker){
     marker.setAnimation(null);
   }
-  //*
 
+  /*
+  /Used to handle the click from user and is passed to Sidebar component.
+  */
   handleClick = (item) => {
     this.onMarkerClick(item, item);
   }
 
+  /*
+  /Creates the infoWindow that's passed to the MapContainer component.
+  */
   createInfoWindows(){
     return <InfoWindow
             position={this.state.activeMarker.position}
@@ -50,7 +72,10 @@ class App extends Component {
               </div>
           </InfoWindow>
   }
-  //*
+  
+  /*
+  /Create all the markers in the map
+  */
 
   createMarker(markers){
     try{
@@ -75,6 +100,10 @@ class App extends Component {
     }
   }
 
+  /*
+  /Render the component
+  */
+
   render() {
     return (
       <div className = "container-flex">
@@ -93,8 +122,12 @@ class App extends Component {
     this.getAll();
   }
 
+  /*
+  /Get all the information of Foursquare API
+  */
+
   getAll(){
-    fetch('https://api.foursquare.com/v2/venues/search?ll=40.752557,-73.973435&query=restaurant&limit=10&intent=browse&radius=10000&client_id=UCF54S5TJFOVXMJ1J4AGS0MTAW0CBRCCPAXGX2CTOINGGXTU&client_secret=VIEJP3NBRQ3U2KAXEMDYHQ1XTLAJJS2AROH3YXYCJYEHACVV&v=20190208')
+    fetch('https://api.foursquare.com/v2/venues/search?ll=40.752557,-73.973435&query=food&limit=10&intent=browse&radius=10000&client_id=UCF54S5TJFOVXMJ1J4AGS0MTAW0CBRCCPAXGX2CTOINGGXTU&client_secret=VIEJP3NBRQ3U2KAXEMDYHQ1XTLAJJS2AROH3YXYCJYEHACVV&v=20190208')
     .then((response) => {
         // Code for handling API response
       response.json().then((resp) => {

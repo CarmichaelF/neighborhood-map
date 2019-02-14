@@ -8,11 +8,15 @@ const mapStyles = {
 
 export class MapContainer extends Component {
 
+  /*
+  /Render the map
+  */
+ 
   render() {
     return (
       <Map
         google={this.props.google}
-        zoom={14}
+        zoom={13}
         style={mapStyles}
         initialCenter={{
          lat: 40.752557,
