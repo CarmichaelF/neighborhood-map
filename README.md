@@ -1,12 +1,12 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-#Neiborhood Map - Udacity project
+# Neiborhood Map - Udacity project
 
 ## Overview
 
 The principal goal of this project is to use google-maps-api with React and another library to pick up some data and create a fully application from scratch.
 
-##Local Installation
+## Local Installation
 
 1.Download or clone this repository.
 2.Run npm start(check-out the Available Scripts section).
