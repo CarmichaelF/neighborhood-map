@@ -107,7 +107,7 @@ class App extends Component {
   render() {
     return (
       <div className = "container-flex">
-      <div className= "row">
+      <div role="application" className= "row">
       <Sidebar sidebaritems = {this.state.venues}
       handleClick = {this.handleClick}></Sidebar>
       <MapContainer 
@@ -135,7 +135,8 @@ class App extends Component {
       });
     })
     .catch((error)=> {
-        console.log(error);
+        alert("Sorry, it wasn't possible to load all the information, try to check out your internet connection.");
+        console.log("ERROR: ", error);
     });
   }
 }

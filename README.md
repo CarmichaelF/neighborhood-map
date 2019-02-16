@@ -1,4 +1,4 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), uses Google Maps and Foursquare API.
 
 # Neiborhood Map - Udacity project
 
@@ -9,8 +9,9 @@ The principal goal of this project is to use google-maps-api with React and anot
 ## Local Installation
 
 1.Download or clone this repository.
-2.Run npm start(check-out the Available Scripts section).
-3.A new browser window should open.
+2.Run npm install.
+3.Run npm start(check out the Available Scripts section).
+4.A new browser window should open.
 
 ## Available Scripts
 

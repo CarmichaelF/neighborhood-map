@@ -29,6 +29,10 @@ export class MapContainer extends Component {
   }
 }
 
+GoogleApiWrapper.onerror = function() {
+  alert("Error loading Google Maps API");
+};
+
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDEoKFWvzVvLPwQmlJG-LjlB8mX7DR9SEA'
 })(MapContainer);
