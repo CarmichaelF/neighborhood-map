@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import MapContainer from './Components/MapContainer';
-import { InfoWindow, Marker } from 'google-maps-react';
+import { InfoWindow } from 'google-maps-react';
 import Foursquare from './Images/powered-by-foursquare-grey.png';
 import Sidebar from './Components/Sidebar';
 import './App.css';
-import { google } from './Components/MapContainer';
 
 class App extends Component {
   /*
@@ -30,35 +29,19 @@ class App extends Component {
   /or when the user clicks on a list item.
   */
 
-  onMarkerClick = (props, marker) =>
-    this.setState({
-      selectedPlace: props,
-      activeMarker: marker,
-      showingInfoWindow: true
+  onMarkerClick= (props, marker)=>{
+      this.setState({
+        selectedPlace: props,
+        activeMarker: marker,
+        showingInfoWindow: true
     });
-
-  /*
-  /Method used to set an animation when mouse is over.
-  */
-
-  onMouseover(props, marker) {
-      marker.setAnimation(google.maps.Animation.BOUNCE);
   }
-
-  /*
-  /Method used to unset an animation when mouse is out.
-  */
-
-  onMouseOut(props,marker){
-    marker.setAnimation(null);
-  }
-
   /*
   /Used to handle the click from user and is passed to Sidebar component.
   */
   handleClick = (item) => {
     this.onMarkerClick(item, item);
-    this.onMouseover(item, item);
+    this.filter(item.name);
   }
 
   /*
@@ -75,33 +58,6 @@ class App extends Component {
               </div>
           </InfoWindow>
   }
-  
-  /*
-  /Create all the markers in the map
-  */
-
-  createMarker(markers){
-    try{
-      return markers.map((element) =>{
-        return <Marker
-                id = {element.id}
-                onClick={this.onMarkerClick}
-                onMouseover={this.onMouseover}
-                onMouseout={this.onMouseOut}
-                key = {element.id}
-                title={element.name}
-                name={element.name}
-                address={element.location.formattedAddress[0]}
-                address2 = {element.location.formattedAddress[1]}
-                position={{lat: element.location.lat, lng: element.location.lng}}>
-        </Marker>
-      })
-    }
-    
-    catch(error){
-      console.log("ERROR:",error);
-    }
-  }
 
   /*
   /Render the component
@@ -113,9 +69,11 @@ class App extends Component {
       <div role="application" className= "row">
       <Sidebar sidebaritems = {this.state.filteredVenues ? this.state.filteredVenues :this.state.venues}
       handleClick = {this.handleClick}
-      filter = {this.filter}></Sidebar>
+      filter = {this.filter}
+      showAll = {this.showAll}></Sidebar>
       <MapContainer 
-      markers = {this.createMarker(this.state.filteredVenues ? this.state.filteredVenues :this.state.venues)}
+      venues = {this.state.filteredVenues ? this.state.filteredVenues :this.state.venues}
+      onMarkerClick = {this.onMarkerClick}
       createInfoWindows = {this.createInfoWindows()}></MapContainer>
         </div>
       </div>
@@ -137,6 +95,11 @@ class App extends Component {
       }
       return null;
     })});
+  }
+
+  showAll=()=>{
+    this.setState({filteredVenues: this.state.venues});
+    this.setState({showingInfoWindow: false});
   }
 
   /*

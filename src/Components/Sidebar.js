@@ -53,8 +53,6 @@ class SideBar extends Component {
     }
   }
 
-  
-
   componentWillReceiveProps(props){
     this.setState({sidebaritems: props.sidebaritems})
   }
@@ -66,6 +64,8 @@ class SideBar extends Component {
         <ul className="nav flex-column">
         <input id="filter" onChange={(event) => this.props.filter(event.target.value)} type="text" placeholder="Filter results..." aria-label="Filter results"></input> 
         {this.populateUl(this.state.sidebaritems)}
+        <li className="nav-item"><button onClick={this.props.showAll} className="nav-link" href="#"><i className="fas fa-arrows-alt"></i>Show All</button>
+      </li>
         </ul>
       </aside>
     );

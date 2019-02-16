@@ -66,4 +66,7 @@ ul.nav li button{
 #filter::placeholder{
     text-align: center;
 }
-    
+
+.fa-arrows-alt{
+    margin-right: 10px;
+}
