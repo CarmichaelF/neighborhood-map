@@ -53,18 +53,7 @@ class SideBar extends Component {
     }
   }
 
-  /*
-  /Filter the li's in the list based on the input of user.
-  */
-
-  filter(value){
-    this.setState({sidebaritems:this.props.sidebaritems.filter((element) =>{
-      if(element.name.includes(value)){
-        return element;
-      }
-      return null;
-    })});
-  }
+  
 
   componentWillReceiveProps(props){
     this.setState({sidebaritems: props.sidebaritems})
@@ -75,7 +64,7 @@ class SideBar extends Component {
       <aside id= "sidebar-list" className= "hidden">
         <button onClick={this.toggleMenu} id= "hamburguer"><i id="hamburguer-icon" className="fas fa-bars"></i></button>
         <ul className="nav flex-column">
-        <input id="filter" onChange={(event) => this.filter(event.target.value)} type="text" placeholder="Filter results..." aria-label="Filter results"></input> 
+        <input id="filter" onChange={(event) => this.props.filter(event.target.value)} type="text" placeholder="Filter results..." aria-label="Filter results"></input> 
         {this.populateUl(this.state.sidebaritems)}
         </ul>
       </aside>

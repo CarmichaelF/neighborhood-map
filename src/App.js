@@ -4,6 +4,7 @@ import { InfoWindow, Marker } from 'google-maps-react';
 import Foursquare from './Images/powered-by-foursquare-grey.png';
 import Sidebar from './Components/Sidebar';
 import './App.css';
+import { google } from './Components/MapContainer';
 
 class App extends Component {
   /*
@@ -18,7 +19,8 @@ class App extends Component {
       showingInfoWindow: false,
       activeMarker: {},
       selectedPlace: {},
-      venues: null
+      venues: null,
+      filteredVenues: null
     };
   }
 
@@ -40,7 +42,7 @@ class App extends Component {
   */
 
   onMouseover(props, marker) {
-      marker.setAnimation(props.google.maps.Animation.BOUNCE);
+      marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 
   /*
@@ -56,6 +58,7 @@ class App extends Component {
   */
   handleClick = (item) => {
     this.onMarkerClick(item, item);
+    this.onMouseover(item, item);
   }
 
   /*
@@ -108,10 +111,11 @@ class App extends Component {
     return (
       <div className = "container-flex">
       <div role="application" className= "row">
-      <Sidebar sidebaritems = {this.state.venues}
-      handleClick = {this.handleClick}></Sidebar>
+      <Sidebar sidebaritems = {this.state.filteredVenues ? this.state.filteredVenues :this.state.venues}
+      handleClick = {this.handleClick}
+      filter = {this.filter}></Sidebar>
       <MapContainer 
-      markers = {this.createMarker(this.state.venues)}
+      markers = {this.createMarker(this.state.filteredVenues ? this.state.filteredVenues :this.state.venues)}
       createInfoWindows = {this.createInfoWindows()}></MapContainer>
         </div>
       </div>
@@ -120,6 +124,19 @@ class App extends Component {
 
   componentDidMount(){
     this.getAll();
+  }
+
+  /*
+  /Filter the li's in the list based on the input of user.
+  */
+
+  filter = (value) =>{
+    this.setState({filteredVenues:this.state.venues.filter((element) =>{
+      if(element.name.includes(value)){
+        return element;
+      }
+      return null;
+    })});
   }
 
   /*

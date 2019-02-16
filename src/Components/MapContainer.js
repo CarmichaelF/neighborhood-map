@@ -6,6 +6,8 @@ const mapStyles = {
   height: '100%'
 };
 
+var google;
+
 export class MapContainer extends Component {
 
   /*
@@ -27,6 +29,10 @@ export class MapContainer extends Component {
       </Map>
     );
   }
+  
+  componentWillReceiveProps(props){
+     google = props.google;
+  }
 }
 
 GoogleApiWrapper.onerror = function() {
@@ -36,3 +42,5 @@ GoogleApiWrapper.onerror = function() {
 export default GoogleApiWrapper({
   apiKey: 'AIzaSyDEoKFWvzVvLPwQmlJG-LjlB8mX7DR9SEA'
 })(MapContainer);
+
+export {google};
