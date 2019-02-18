@@ -3,6 +3,7 @@ import MapContainer from './Components/MapContainer';
 import { InfoWindow } from 'google-maps-react';
 import Foursquare from './Images/powered-by-foursquare-grey.png';
 import Sidebar from './Components/Sidebar';
+import ErrorBoundary from './Components/ErrorBoundary';
 import './App.css';
 
 class App extends Component {
@@ -71,10 +72,12 @@ class App extends Component {
       handleClick = {this.handleClick}
       filter = {this.filter}
       showAll = {this.showAll}></Sidebar>
+      <ErrorBoundary>
       <MapContainer 
       venues = {this.state.filteredVenues ? this.state.filteredVenues :this.state.venues}
       onMarkerClick = {this.onMarkerClick}
       createInfoWindows = {this.createInfoWindows()}></MapContainer>
+      </ErrorBoundary>
         </div>
       </div>
     );
