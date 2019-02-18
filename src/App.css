@@ -70,3 +70,8 @@ ul.nav li button{
 .fa-arrows-alt{
     margin-right: 10px;
 }
+
+#error-h1{
+    width: 100%;
+    text-align: center;
+}
