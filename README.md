@@ -13,6 +13,8 @@ The principal goal of this project is to use google-maps-api with React and anot
 3.Run npm start(check out the Available Scripts section).
 4.A new browser window should open.
 
+Or use the online version: https://carmichaelf.github.io/neighborhood-map/
+
 ## Available Scripts
 
 In the project directory, you can run:
